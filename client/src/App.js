@@ -4,6 +4,7 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Auth from './hoc/auth';
+import NavBar from './components/views/NavBar/NavBar';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <Suspense fallback={<div>Loading</div>}>
+      <NavBar />
       <div style={ {paddingTop: '69px', minHeight: 'calc(100vh-80px)'}}>
         <Routes>
           <Route path='/*' element={ <Landing /> } />
