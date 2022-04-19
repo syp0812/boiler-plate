@@ -1,9 +1,10 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Button } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { MailOutlined } from '@ant-design/icons';
 
 function RightMenu(props) {
 
@@ -20,22 +21,23 @@ function RightMenu(props) {
         })
     }
 
-    if(user.userData  && user.userData.isAuth) {
+    if(user.userData  && !user.userData.isAuth) {
         return(
                 <Menu mode={props.mode}>
-                    <Menu.Item key='mail'>
-                        <a href='/api/users/login'>Sign In</a>
+                    <Menu.Item key='mail' icon={<MailOutlined />}
+                    >
+                        <a href='/login'>Sign In</a>
                     </Menu.Item>
                     <Menu.Item key='app'>
-                        <a href='/api/users/register'>Sign Up</a>
+                        <a href='/register'>Sign Up</a>
                     </Menu.Item>
                 </Menu>
         )
     } else {
         return (
-            <Menu>
+            <Menu mode={props.mode}>
                 <Menu.Item key='logout'>
-                    <a onClick={ logoutHandler }>Log out</a>
+                    <Button onClick={ logoutHandler }>Log out</Button>
                 </Menu.Item>    
             </Menu>
         )

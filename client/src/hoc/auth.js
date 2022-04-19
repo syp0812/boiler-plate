@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../_actions/user_actions'
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+
 
 export default function(SpecificComponent, option, adminRoute = null) {
+    // const authentication = function(SpecificComponent, option, adminRoute = null){
+    function AuthenticationCheck(props) {
 
-    function AuthenticationCheck() {
+        let user = useSelector(state => state.user);
 
         const dispatch = useDispatch();
         const navigate = useNavigate();
@@ -24,15 +27,17 @@ export default function(SpecificComponent, option, adminRoute = null) {
                         navigate('/');
                     }
                     else {
-                        if(option === false ) 
+                        if(option === false ) {
                             navigate('/');
+                        }
                     }
                 }
             })
         }, [])
         return(
-            <SpecificComponent />
+            <SpecificComponent {...props} user={user} />
         )
     }
     return AuthenticationCheck
 }
+// export default authentication

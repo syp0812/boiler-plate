@@ -1,6 +1,7 @@
 import { LOGIN_USER, REGISTER_USER, LOGOUT_USER, AUTH_USER  } from '../_actions/types';
 
-export default function(state={}, action) {
+// export default function(state={}, action) {
+    const userReducer = (state={}, action) => {
 
     switch(action.type) {
 
@@ -20,3 +21,4 @@ export default function(state={}, action) {
             return state;
     }
 }
+export default userReducer

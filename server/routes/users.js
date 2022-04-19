@@ -4,12 +4,12 @@ const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 
 // register route
-router.post('api/users/register', (req,res) => {
+router.post('/api/users/register', (req,res) => {
 
     const user = new User(req.body);
     user.save((err,doc) => {
 
-        if(!user) return res.json({
+        if(err) return res.json({
             success: false, err
         })
         return res.status(200).json({
@@ -19,7 +19,7 @@ router.post('api/users/register', (req,res) => {
 })
 
 // login route
-router.post('api/users/login', (req,res) => {
+router.post('/api/users/login', (req,res) => {
 
     User.findOne({ email: req.body.email }, (err,user) => {
         if(!user){
@@ -50,9 +50,9 @@ router.post('api/users/login', (req,res) => {
 })
 
 // logout route
-router.get('api/users/logout', auth, (req,res) => {
+router.get('/api/users/logout', auth, (req,res) => {
 
-    User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err,user) => {
+    User.AndUpdate({ _id: req.user._id }, { token: '', tokenExp: '' }, (err,doc) => {
 
         if(err) return res.json({
             success: false, err
@@ -64,11 +64,11 @@ router.get('api/users/logout', auth, (req,res) => {
 })
 
 // auth route
-router.get('api/users/auth', auth, (req,res) => {
+router.get('/api/users/auth', auth, (req,res) => {
 
     res.status(200).json({
         _id: req.user._id,
-        isAdmin: req.user.role === 0? false : true,
+        isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
         name: req.user.name,

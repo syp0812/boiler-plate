@@ -24,9 +24,9 @@ export const registerUser = (dataToSubmit) => {
     }
 }
 
-export const logoutUser = (dataToSubmit) => {
+export const logoutUser = () => {
 
-    const request = axios.get(`${USER_SERVER}/logout`, dataToSubmit)
+    const request = axios.get(`${USER_SERVER}/logout`)
     .then(response => response.data);
 
     return{
@@ -35,9 +35,9 @@ export const logoutUser = (dataToSubmit) => {
     }
 }
 
-export const auth = (dataToSubmit) => {
+export function auth() {
 
-    const request = axios.get(`${USER_SERVER}/auth`, dataToSubmit)
+    const request = axios.get(`${USER_SERVER}/auth`)
     .then(response => response.data);
 
     return{
